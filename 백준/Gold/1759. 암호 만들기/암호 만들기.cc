@@ -21,6 +21,7 @@ bool is_promising(int depth,int node) {
 	}
 	return true;
 }
+
 bool is_vowel(char c) {
 	for (int i = 0; i < 5; i++) {
 		if (vowels[i] == c) return true;
@@ -53,20 +54,13 @@ int main() {
 	sort(cs.begin(), cs.end());
 
 	auto it = find_if(cs.rbegin(), cs.rend(), [](char c1) {
-		for (int i = 0; i < 5; i++) {
-			if (c1 == vowels[i]) return true;
-		}
-		return false;
+		return is_vowel(c1);
 		});
 	if (it != cs.rend()) {
 		last_vowel_index = cs.rend() - it - 1;
 	}
 	it = find_if(cs.rbegin(), cs.rend(), [](char c1) {
-		bool toggle = false;
-		for (int i = 0; i < 5; i++) {
-			if (c1 == vowels[i]) toggle = true;
-		}
-		return !toggle;
+		return !is_vowel(c1);
 		});
 	if (it != cs.rend()) {
 		last_consonant_index = cs.rend() - it - 1;
